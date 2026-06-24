@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChiroHand — Preventive Hand Care Before Injury Strikes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --ink:       #0f1117;
+      --paper:     #f7f5f0;
+      --bone:      #ede9e1;
+      --steel:     #3b4251;
+      --muted:     #7a7f8e;
+      --accent:    #1d6b5b;   /* deep clinical teal */
+      --accent2:   #c8573a;   /* anatomical red-orange */
+      --accent3:   #e8b84b;   /* caution amber */
+      --rule:      #d4cfc6;
+      --white:     #ffffff;
+
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      --max-w: 1120px;
+      --gutter: clamp(1.25rem, 5vw, 3rem);
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--ink);
+      border-bottom: 1px solid #2a2d36;
+      padding: 0.75rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span {
+      color: var(--accent3);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #a0a5b3;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      background: var(--ink);
+      color: var(--white);
+      padding: clamp(4rem, 10vw, 8rem) var(--gutter) clamp(3rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Signature element: anatomical hand grid watermark */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.03) 59px, rgba(255,255,255,0.03) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.03) 59px, rgba(255,255,255,0.03) 60px);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent3);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      max-width: 14ch;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--accent3);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: #b8bcc9;
+      max-width: 56ch;
+      line-height: 1.7;
+      margin-bottom: 2.75rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid #2a2d36;
+      padding-top: 2rem;
+      margin-top: 0.5rem;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-num span {
+      color: var(--accent3);
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      max-width: 18ch;
+    }
+
+    /* ─── SECTION SHELL ──────────────────────────────────── */
+    section {
+      padding: clamp(3.5rem, 8vw, 6rem) var(--gutter);
+    }
+    .inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.5rem;
+      max-width: 22ch;
+    }
+
+    .section-body {
+      font-size: 1.05rem;
+      color: var(--steel);
+      line-height: 1.75;
+      max-width: 68ch;
+    }
+
+    /* ─── PROBLEM SECTION ────────────────────────────────── */
+    .problem {
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      align-items: start;
+    }
+
+    .problem-card {
+      border-left: 3px solid var(--accent2);
+      padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+      background: var(--white);
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .problem-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .problem-card p {
+      font-size: 0.92rem;
+      color: var(--steel);
+      line-height: 1.65;
+    }
+
+    /* ─── GAPS SECTION ───────────────────────────────────── */
+    .gaps {
+      background: var(--bone);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .gaps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .gap-item {
+      background: var(--white);
+      border-radius: 0.75rem;
+      padding: 2rem 1.75rem;
+      border-top: 4px solid var(--accent);
+    }
+    .gap-item:nth-child(2) { border-top-color: var(--accent2); }
+    .gap-item:nth-child(3) { border-top-color: var(--accent3); }
+
+    .gap-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .gap-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin-bottom: 0.65rem;
+      line-height: 1.3;
+    }
+    .gap-item p {
+      font-size: 0.9rem;
+      color: var(--steel);
+      line-height: 1.65;
+    }
+
+    /* ─── DISCIPLINES SECTION ────────────────────────────── */
+    .disciplines {
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* Signature: Venn-style intersection diagram */
+    .venn-wrap {
+      margin: 3rem auto 0;
+      max-width: 640px;
+      position: relative;
+    }
+
+    .venn-svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .disciplines-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .discipline {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.25rem;
+      background: var(--white);
+      border-radius: 0.5rem;
+      border: 1px solid var(--rule);
+    }
+    .discipline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+    .discipline h4 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    .discipline p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ─── PILLARS SECTION ────────────────────────────────── */
+    .pillars {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .pillars .section-label { color: var(--accent3); }
+    .pillars .section-heading { color: var(--white); }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid #2a2d36;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .pillar {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid #2a2d36;
+      transition: background 0.25s;
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar:hover { background: #1a1d27; }
+
+    .pillar-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--accent3);
+      margin-bottom: 1rem;
+    }
+    .pillar h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+    .pillar p {
+      font-size: 0.82rem;
+      color: #8a8fa0;
+      line-height: 1.6;
+    }
+    .pillar-bar {
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+      width: 2rem;
+    }
+
+    /* ─── UNIQUENESS SECTION ─────────────────────────────── */
+    .uniqueness {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .uniqueness .section-label { color: rgba(255,255,255,0.55); }
+    .uniqueness .section-heading { color: var(--white); }
+
+    .unique-quote {
+      border-left: 4px solid var(--accent3);
+      padding: 1.5rem 2rem;
+      background: rgba(0,0,0,0.15);
+      border-radius: 0 0.75rem 0.75rem 0;
+      margin: 2.5rem 0;
+      max-width: 70ch;
+    }
+    .unique-quote p {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      line-height: 1.5;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .compare-table-wrap {
+      overflow-x: auto;
+      margin-top: 2.5rem;
+      border-radius: 0.75rem;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: rgba(0,0,0,0.2);
+      color: var(--white);
+    }
+    .compare-table th {
+      padding: 0.9rem 1.1rem;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.15);
+    }
+    .compare-table td {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.85);
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .yes { color: #7dd6a2; font-weight: 600; }
+    .compare-table .no  { color: rgba(255,255,255,0.3); }
+    .compare-table .chirohand-col { color: var(--accent3); font-weight: 600; }
+    .compare-table tr td:last-child { color: var(--accent3); font-weight: 600; }
+
+    /* ─── RESEARCH ROADMAP ───────────────────────────────── */
+    .roadmap {
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .roadmap-track {
+      display: flex;
+      gap: 0;
+      margin-top: 3rem;
+      position: relative;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .roadmap-track::before {
+      content: '';
+      position: absolute;
+      top: 2.25rem;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3), var(--rule));
+    }
+
+    .roadmap-step {
+      flex: 1;
+      min-width: 160px;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .roadmap-circle {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      border: 2px solid;
+    }
+
+    .roadmap-step:nth-child(1) .roadmap-circle { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .roadmap-step:nth-child(2) .roadmap-circle { background: var(--paper); border-color: var(--accent2); color: var(--accent2); }
+    .roadmap-step:nth-child(3) .roadmap-circle { background: var(--paper); border-color: var(--accent3); color: var(--accent3); }
+    .roadmap-step:nth-child(4) .roadmap-circle { background: var(--paper); border-color: var(--muted); color: var(--muted); }
+    .roadmap-step:nth-child(5) .roadmap-circle { background: var(--paper); border-color: var(--muted); color: var(--muted); }
+
+    .roadmap-step h4 {
+      font-weight: 600;
+      font-size: 0.88rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .roadmap-step p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .roadmap-step .badge {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2rem;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    .badge-active { background: #d4f0e6; color: var(--accent); }
+    .badge-next   { background: #fde8e2; color: var(--accent2); }
+    .badge-future { background: #f0ece4; color: var(--muted); }
+
+    /* ─── CLINICAL RELEVANCE ─────────────────────────────── */
+    .clinical {
+      background: var(--bone);
+    }
+
+    .bullets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .bullet-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.25rem;
+      background: var(--white);
+      border-radius: 0.5rem;
+    }
+    .bullet-check {
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.1rem;
+    }
+    .bullet-check svg { width: 0.65rem; height: 0.65rem; }
+    .bullet-item p {
+      font-size: 0.93rem;
+      color: var(--steel);
+      line-height: 1.6;
+    }
+
+    /* ─── AUTHOR / ABOUT ─────────────────────────────────── */
+    .about {
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-card {
+      background: var(--ink);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 0.75rem;
+    }
+    .about-card-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+    .about-card-role {
+      font-size: 0.8rem;
+      color: var(--accent3);
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.5rem;
+    }
+    .cred-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .cred-list li {
+      font-size: 0.82rem;
+      color: #9aa0b0;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .cred-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent3);
+    }
+
+    .about-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      margin-bottom: 1.25rem;
+      line-height: 1.2;
+    }
+    .about-text p {
+      font-size: 1rem;
+      color: var(--steel);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    /* ─── JOURNAL / PUBLICATION ──────────────────────────── */
+    .publication {
+      background: var(--ink);
+      color: var(--white);
+      border-top: 1px solid #2a2d36;
+    }
+
+    .pub-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 2.5rem;
+    }
+
+    .pub-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      line-height: 1.35;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      color: var(--white);
+    }
+
+    .pub-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .pub-meta-row {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      align-items: baseline;
+    }
+    .pub-meta-key {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 6rem;
+    }
+    .pub-meta-val { color: #c8ccda; }
+
+    .pub-sidebar h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .pub-sidebar p {
+      font-size: 0.88rem;
+      color: #8a8fa0;
+      line-height: 1.65;
+    }
+
+    .preprint-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(200, 88, 58, 0.15);
+      border: 1px solid rgba(200, 88, 58, 0.35);
+      color: #f09070;
+      padding: 0.35rem 0.8rem;
+      border-radius: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: #080a10;
+      color: #6b7180;
+      padding: 2rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+    }
+    footer .logo {
+      font-family: var(--font-display);
+      color: var(--white);
+      font-size: 1rem;
+    }
+    footer .logo span { color: var(--accent3); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-in {
+        opacity: 0;
+        transform: translateY(1.5rem);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .gaps-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .disciplines-list { grid-template-columns: 1fr; }
+      .bullets-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .pub-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 620px) {
+      .nav-links { display: none; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#"><span>Chiro</span>Hand</a>
+    <ul class="nav-links">
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#pillars">The Program</a></li>
+      <li><a href="#uniqueness">Why It Matters</a></li>
+      <li><a href="#roadmap">Research</a></li>
+      <li><a href="#publication">Publication</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Paper 1 of 5 — Conceptual Framework &amp; Rationale</div>
+      <h1 class="hero-headline">
+        Hand care that begins <em>before</em> the injury.
+      </h1>
+      <p class="hero-sub">
+        ChiroHand is the first structured preventive hand care program at the intersection of chiropractic, ergonomics, occupational health, and preventive medicine — targeting asymptomatic individuals before symptoms emerge, not after.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">500<span>k</span></div>
+          <div class="stat-label">Work-related hand injuries per year in Canada alone</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">502<span>k</span></div>
+          <div class="stat-label">US workplace MSD cases, 2021–22 (BLS)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">30</div>
+          <div class="stat-label">Median days away from work — carpal tunnel syndrome</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$2<span>B</span></div>
+          <div class="stat-label">Annual US medical costs of CTS alone</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Existing preventive clinical hand programs in the literature</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="problem" id="problem">
+    <div class="inner">
+      <div class="section-label fade-in">The Clinical Gap</div>
+      <h2 class="section-heading fade-in">The most-used part of the body has no prevention program.</h2>
+      <p class="section-body fade-in">
+        Hand and upper-extremity musculoskeletal disorders develop gradually over months and years through cumulative exposure to identifiable, modifiable risk factors. The window for intervention is long and predictable — yet it remains clinically underutilized. Assessment and treatment begin only after symptoms have appeared and function has already declined.
+      </p>
+
+      <div class="problem-grid">
+        <div class="problem-card fade-in">
+          <h3>The dominant model is reactive.</h3>
+          <p>Diagnosis and treatment begin after pain. Conditions like carpal tunnel syndrome, de Quervain's tenosynovitis, and lateral epicondylitis are gradual in onset — driven by cumulative strain, posture, fatigue, and tool mismatch that accumulate long before a patient reports symptoms.</p>
+        </div>
+        <div class="problem-card fade-in">
+          <h3>Chiropractors see the right patients — but lack the tools.</h3>
+          <p>Survey data show 68% of chiropractors never use the DASH questionnaire, 79% never use the PRWE, and range-of-motion is assessed by visual inspection in most practices. High-risk individuals pass through primary care encounters without structured hand assessment.</p>
+        </div>
+        <div class="problem-card fade-in">
+          <h3>Ergonomics never reaches the clinic.</h3>
+          <p>Structured ergonomic risk assessment is available to workers in large regulated industries — but virtually inaccessible to the self-employed, recreational, and aging adult populations who bear a comparable cumulative exposure burden. Tool-body fit guidance never reaches individuals through clinical care.</p>
+        </div>
+        <div class="problem-card fade-in">
+          <h3>No program bridges all four dimensions.</h3>
+          <p>Hand therapy focuses on rehabilitation. Ergonomics operates at the population level. Chiropractic targets the spine. Preventive care frameworks lack hand-specific protocols. No single existing program integrates clinical assessment, exercise prescription, spinal neuromuscular priming, and individual ergonomic guidance into one structured intervention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE GAPS -->
+  <section class="gaps" id="gaps">
+    <div class="inner">
+      <div class="section-label fade-in">Three Interlocking Gaps</div>
+      <h2 class="section-heading fade-in">Why the problem has persisted</h2>
+
+      <div class="gaps-grid">
+        <div class="gap-item fade-in">
+          <div class="gap-icon">🩺</div>
+          <h3>Clinical Gap</h3>
+          <p>Chiropractors regularly encounter patients with occupational and recreational risk profiles for hand injury — yet validated hand outcome measures are almost entirely absent from routine practice. Hand health is not a prevention target in any existing chiropractic clinical workflow.</p>
+        </div>
+        <div class="gap-item fade-in">
+          <div class="gap-icon">⚙️</div>
+          <h3>Ergonomic &amp; OHS Gap</h3>
+          <p>Ergonomics tools can identify cumulative exposure risk and inform prevention controls — but they operate entirely outside the clinical encounter. Patients receive clinical care without ergonomic context, or ergonomic advice without clinical grounding. Never both, integrated around the individual.</p>
+        </div>
+        <div class="gap-item fade-in">
+          <div class="gap-icon">🛡️</div>
+          <h3>Prevention Paradigm Gap</h3>
+          <p>Existing chiropractic prevention frameworks address spinal health, fall prevention, and posture wellness. Hand health is entirely absent as a prevention target. No program targets asymptomatic individuals, establishes pre-injury functional baselines, and tracks fatigue thresholds before the first symptom appears.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCIPLINES -->
+  <section class="disciplines" id="disciplines">
+    <div class="inner">
+      <div class="section-label fade-in">The Integration</div>
+      <h2 class="section-heading fade-in">Four disciplines. Each provides what the others cannot.</h2>
+      <p class="section-body fade-in">ChiroHand is not multidisciplinary by aesthetic preference — the integration is structural. Removing any one of the four disciplines leaves a clinically necessary dimension unaddressed.</p>
+
+      <div class="disciplines-list">
+        <div class="discipline fade-in">
+          <div class="discipline-dot" style="background: var(--accent);"></div>
+          <div>
+            <h4>Chiropractic Clinical Practice</h4>
+            <p>Provides clinical access to the primary musculoskeletal population, multimodal intervention scope, and a unique neurophysiological mechanism: cervical SMT has been shown to increase grip strength by 6.95–17.02% in controlled trials, priming upper-extremity neuromuscular response before training.</p>
+          </div>
+        </div>
+        <div class="discipline fade-in">
+          <div class="discipline-dot" style="background: var(--accent2);"></div>
+          <div>
+            <h4>Applied Ergonomics</h4>
+            <p>Provides systematic methodology for identifying cumulative exposure risk using validated observational tools, translating population-level data into individual-level tool, posture, and workstation recommendations calibrated to the patient's assessed functional capacity.</p>
+          </div>
+        </div>
+        <div class="discipline fade-in">
+          <div class="discipline-dot" style="background: var(--accent3);"></div>
+          <div>
+            <h4>Occupational Health &amp; Safety</h4>
+            <p>Provides governance structure, hazard monitoring logic, and population-level accountability — and the equity rationale for locating ergonomic guidance within clinical practice, reaching populations that large-industry OHS programs systematically miss.</p>
+          </div>
+        </div>
+        <div class="discipline fade-in">
+          <div class="discipline-dot" style="background: var(--steel);"></div>
+          <div>
+            <h4>Preventive Care Philosophy</h4>
+            <p>Provides the organizing logic: intervene before symptom onset, establish baselines, stratify risk, and design programs around asymptomatic individuals. Hand-focused strength training in healthy adults produces significant grip strength gains (Hedges' g = 0.44) and large manual dexterity gains (g = 1.11) — confirming primary prevention is feasible.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIVE PILLARS -->
+  <section class="pillars" id="pillars">
+    <div class="inner">
+      <div class="section-label">The ChiroHand Program</div>
+      <h2 class="section-heading fade-in">Five pillars. One program that doesn't exist yet — anywhere.</h2>
+
+      <div class="pillars-grid">
+        <div class="pillar fade-in">
+          <div class="pillar-num">PILLAR 01</div>
+          <div class="pillar-bar"></div>
+          <h3>Objective, Standardized Hand Assessment</h3>
+          <p>Instrumented assessment of hand function in asymptomatic patients — before any complaint exists. Grip strength, range of motion, endurance threshold, and validated patient-reported outcomes (PRWE, QuickDASH) establish the individual functional baseline.</p>
+        </div>
+        <div class="pillar fade-in">
+          <div class="pillar-num">PILLAR 02</div>
+          <div class="pillar-bar" style="background: var(--accent2);"></div>
+          <h3>Population-Contextualized Benchmarking</h3>
+          <p>Every patient's results are compared to normative data stratified by sex, age, hand dominance, and occupational classification — identifying subclinical vulnerability in individuals who feel functional and have not yet reported symptoms.</p>
+        </div>
+        <div class="pillar fade-in">
+          <div class="pillar-num">PILLAR 03</div>
+          <div class="pillar-bar" style="background: var(--accent3);"></div>
+          <h3>Deficit-Matched, Phased Exercise Prescription</h3>
+          <p>Exercise programming generated directly from the individual's assessed functional profile, progressing from mobility restoration through progressive resistance to functional and activity-specific training — with a maintenance phase that embeds preventive benefit longitudinally.</p>
+        </div>
+        <div class="pillar fade-in">
+          <div class="pillar-num">PILLAR 04</div>
+          <div class="pillar-bar" style="background: #5a7fa8;"></div>
+          <h3>Chiropractic Clinical Integration</h3>
+          <p>Deliberate sequencing of cervical and upper thoracic SMT before supervised hand training introduces a neurophysiological mechanism for optimizing exercise response that does not exist in any occupational health, hand therapy, or physiotherapy hand program.</p>
+        </div>
+        <div class="pillar fade-in">
+          <div class="pillar-num">PILLAR 05</div>
+          <div class="pillar-bar" style="background: #7a5fa8;"></div>
+          <h3>Individual-Linked Ergonomic &amp; Activity Guidance</h3>
+          <p>Each patient's assessed strength profile is translated directly into specific ergonomic tool recommendations and activity-specific protocols — spanning occupational tasks, recreational activities, and domestic activities — including a real-time fatigue monitoring component.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIQUENESS -->
+  <section class="uniqueness" id="uniqueness">
+    <div class="inner">
+      <div class="section-label">The Case for Novelty</div>
+      <h2 class="section-heading fade-in">The space ChiroHand occupies is not underserved. It is empty.</h2>
+
+      <div class="unique-quote fade-in">
+        <p>"No hand therapy program embeds ergonomic tool guidance linked to individual assessment. No ergonomics program delivers SMT and supervised hand training. No chiropractic program establishes pre-injury baselines, benchmarks against population norms, and prescribes activity-specific fatigue monitoring protocols."</p>
+      </div>
+
+      <div class="compare-table-wrap fade-in">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Hand Therapy</th>
+              <th>Ergonomics Program</th>
+              <th>Chiropractic (Current)</th>
+              <th>ChiroHand</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Targets asymptomatic individuals</td>
+              <td class="no">✕</td>
+              <td class="yes">✓</td>
+              <td class="no">✕</td>
+              <td class="yes">✓</td>
+            </tr>
+            <tr>
+              <td>Pre-injury functional baseline</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="yes">✓</td>
+            </tr>
+            <tr>
+              <td>Population normative benchmarking</td>
+              <td class="yes">✓</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="yes">✓</td>
+            </tr>
+            <tr>
+              <td>Cervical SMT + hand training sequencing</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="yes">✓</td>
+            </tr>
+            <tr>
+              <td>Individual-linked ergonomic tool guidance</td>
+              <td class="no">✕</td>
+              <td class="yes">✓ (group level)</td>
+              <td class="no">✕</td>
+              <td class="yes">✓</td>
+            </tr>
+            <tr>
+              <td>Real-time fatigue monitoring</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="yes">✓</td>
+            </tr>
+            <tr>
+              <td>Delivered within chiropractic practice</td>
+              <td class="no">✕</td>
+              <td class="no">✕</td>
+              <td class="yes">✓ (symptom focus)</td>
+              <td class="yes">✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH ROADMAP -->
+  <section class="roadmap" id="roadmap">
+    <div class="inner">
+      <div class="section-label fade-in">Research Program</div>
+      <h2 class="section-heading fade-in">A five-paper series from rationale to digital tool.</h2>
+      <p class="section-body fade-in">This paper is Paper 1 of a planned publication series establishing ChiroHand from conceptual foundation through validated clinical protocol.</p>
+
+      <div class="roadmap-track">
+        <div class="roadmap-step fade-in">
+          <div class="roadmap-circle">01</div>
+          <h4>Rationale &amp; Conceptual Framework</h4>
+          <p>Clinical need, three gaps, multidisciplinary rationale, five pillars</p>
+          <span class="badge badge-active">This paper</span>
+        </div>
+        <div class="roadmap-step fade-in">
+          <div class="roadmap-circle">02</div>
+          <h4>Pilot Study</h4>
+          <p>Full protocol, data collection, outcomes in community chiropractic setting</p>
+          <span class="badge badge-next">Next</span>
+        </div>
+        <div class="roadmap-step fade-in">
+          <div class="roadmap-circle">03</div>
+          <h4>Normative Data</h4>
+          <p>Multi-position grip strength norms across sex, age, dominance, occupation</p>
+          <span class="badge badge-future">Planned</span>
+        </div>
+        <div class="roadmap-step fade-in">
+          <div class="roadmap-circle">04</div>
+          <h4>Protocol Validation</h4>
+          <p>Inter-rater reliability, internal consistency, construct validity</p>
+          <span class="badge badge-future">Planned</span>
+        </div>
+        <div class="roadmap-step fade-in">
+          <div class="roadmap-circle">05</div>
+          <h4>ChiroHand Monitor</h4>
+          <p>Real-time fatigue monitoring app using computer vision &amp; IMU sensors</p>
+          <span class="badge badge-future">Planned</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLINICAL RELEVANCE -->
+  <section class="clinical" id="clinical">
+    <div class="inner">
+      <div class="section-label fade-in">Clinical Relevance</div>
+      <h2 class="section-heading fade-in">What this means for practice</h2>
+
+      <div class="bullets-grid">
+        <div class="bullet-item fade-in">
+          <div class="bullet-check">
+            <svg viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>Chiropractors encounter high-risk patients daily but currently lack standardized hand prevention tools to act on that access.</p>
+        </div>
+        <div class="bullet-item fade-in">
+          <div class="bullet-check">
+            <svg viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>Hand MSD risk is identifiable before symptoms develop — the chiropractic practice setting is a viable and underutilized prevention site.</p>
+        </div>
+        <div class="bullet-item fade-in">
+          <div class="bullet-check">
+            <svg viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>Integrating ergonomics with clinical care addresses the full spectrum of risk factors — occupational, recreational, and domestic — that no single discipline can resolve.</p>
+        </div>
+        <div class="bullet-item fade-in">
+          <div class="bullet-check">
+            <svg viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>Cervical SMT may neurophysiologically prime the upper-extremity training response — a novel clinical sequencing with documented mechanistic basis.</p>
+        </div>
+        <div class="bullet-item fade-in" style="grid-column: 1 / -1;">
+          <div class="bullet-check">
+            <svg viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>ChiroHand provides a conceptual foundation and clinical rationale for an urgently needed pilot study — the next step in a structured, multi-paper research program.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+  
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo"><span>Chiro</span>Hand</div>
+    <div>© 2026 Enas Aref · All rights reserved · Manuscript in preparation</div>
+    <div>Paper 1 · Journal of Bodywork and Movement Therapies</div>
+  </footer>
+
+  <!-- SCROLL ANIMATION -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
